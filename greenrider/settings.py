@@ -24,8 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ujbqf2ja@pdvc3qlfrcojb)h4%ek2%92lw(s#&*p7fke4w8!&l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = False
+# DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['*']
@@ -85,19 +85,6 @@ WSGI_APPLICATION = 'greenrider.wsgi.application'
 #         "PASSWORD": "offer@123",
 #         "HOST": "localhost",
 #         "PORT": "3306",
-#     }
-# }
-
-
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': os.environ.get('railway'),
-#         'USER': os.environ.get('root'),
-#         'PASSWORD': os.environ.get('dQaFAcFDKLtUAjdXGgSccPxbzuabcrDt'),
-#         'HOST': os.environ.get('mysql.railway.internal'),
-#         'PORT': os.environ.get('3306'),
 #     }
 # }
 

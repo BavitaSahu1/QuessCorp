@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from hrm import db_connector
 from django.db import connection
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     return render(request, "index.html")
@@ -16,7 +17,7 @@ def add_emp(request):
 
 
 
-# @csrf_exempt
+@csrf_exempt
 def saveEmployeeData(request):
     if request.method=='POST':
             First_Name = request.POST.get('f_name')
@@ -49,7 +50,7 @@ def saveEmployeeData(request):
 
 
 # dictfetchall for show data to all Pages --------------------------
-# @csrf_exempt
+@csrf_exempt
 def dictfetchall(cursor):
     desc = cursor.description
     return [
@@ -58,7 +59,7 @@ def dictfetchall(cursor):
     ]
 
 
-# @csrf_exempt
+@csrf_exempt
 def view_emp(request):
         cursor = connection.cursor()
         global a
@@ -78,7 +79,7 @@ def view_emp(request):
         return render(request,"view_emp.html", {'data':a})
 
 
-# @csrf_exempt
+@csrf_exempt
 def DeleteEmp(request):
         if request.method == 'POST':
             DeleteButton = request.POST.get('DeleteBtn')
@@ -96,7 +97,7 @@ def DeleteEmp(request):
         return redirect('view_emp')
 
 
-# @csrf_exempt
+@csrf_exempt
 def view_attendance(request):
         cursor = connection.cursor()
         global a
@@ -134,7 +135,7 @@ def view_attendance(request):
         return render(request,"view_attendance.html", {'data':a})
 
 
-# @csrf_exempt
+@csrf_exempt
 def EditAttStatus(request):
         global a,b
         if request.method == 'POST':
@@ -147,7 +148,7 @@ def EditAttStatus(request):
 
 
 
-# @csrf_exempt
+@csrf_exempt
 def UpdateAttendance(request):
     if request.method == 'POST': 
         EmpID = request.POST.get('emp_id')         
@@ -161,7 +162,6 @@ def UpdateAttendance(request):
         cursor.execute(f"SELECT full_name FROM employee WHERE emp_id = {EmpID}")
         emp_name = cursor.fetchone()
 
-        #start test
         query = f"select emp_id, attendance_date from attendance where emp_id = {EmpID} and attendance_date = '{AttendanceDate}';"
         cursor.execute(query)
         check_attendance = dictfetchall(cursor)
@@ -170,7 +170,6 @@ def UpdateAttendance(request):
         f"on the selected date {check_attendance[0]['attendance_date']}. "
         f"Duplicate entry is not allowed.")
         else:
-        #end test 
 
             cmd = "insert into attendance(emp_id, attendance_date, in_time, out_time, emp_status) values({},'{}','{}','{}','{}')".format(EmpID, AttendanceDate, InTime, OutTime, AttendanceStatus) 
             cursor.execute(cmd)
@@ -184,8 +183,7 @@ def base_dashboard(request):
      return render(request,"base_dashboard.html")
 
 
-### Start Test
-# @csrf_exempt
+@csrf_exempt
 def dashboard(request):
     cursor = connection.cursor()
     global a,b,c,d 
@@ -217,4 +215,3 @@ ORDER BY
     print(f"count of employee = {b}")
     print(f"count of employee = {c}")
     return render(request,"dashboard.html", {'data1':a, 'data2':b, 'data3':c, 'data4':d})
-### END TEST
