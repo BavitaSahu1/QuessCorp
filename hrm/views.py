@@ -91,7 +91,9 @@ def DeleteEmp(request):
                 emp_name = my_cur.fetchone()
                 # 
                 query = "Delete from employee where emp_id='{}'".format(DeleteButton)
+                query2 = "Delete from attendance where emp_id='{}'".format(DeleteButton)
                 my_cur.execute(query)
+                my_cur.execute(query2)
                 con.commit()
                 messages.success(request, f"{emp_name[0]}'s Employee Record Deleted. ")
         return redirect('view_emp')
