@@ -90,17 +90,34 @@ WSGI_APPLICATION = 'greenrider.wsgi.application'
 
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': os.environ.get('railway'),
+#         'USER': os.environ.get('root'),
+#         'PASSWORD': os.environ.get('dQaFAcFDKLtUAjdXGgSccPxbzuabcrDt'),
+#         'HOST': os.environ.get('mysql.railway.internal'),
+#         'PORT': os.environ.get('3306'),
+#     }
+# }
+
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('railway'),
-        'USER': os.environ.get('root'),
-        'PASSWORD': os.environ.get('dQaFAcFDKLtUAjdXGgSccPxbzuabcrDt'),
-        'HOST': os.environ.get('mysql.railway.internal'),
-        'PORT': os.environ.get('3306'),
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": os.environ.get("MYSQLDATABASE"),
+        "USER": os.environ.get("MYSQLUSER"),
+        "PASSWORD": os.environ.get("MYSQLPASSWORD"),
+        "HOST": os.environ.get("MYSQLHOST"),
+        "PORT": os.environ.get("MYSQLPORT"),
     }
 }
 
+print(
+    os.environ.get("MYSQLHOST"),
+    os.environ.get("MYSQLDATABASE"),
+)
 
 
 # Password validation
