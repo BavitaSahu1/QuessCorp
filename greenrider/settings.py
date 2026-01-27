@@ -24,10 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ujbqf2ja@pdvc3qlfrcojb)h4%ek2%92lw(s#&*p7fke4w8!&l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -93,14 +94,26 @@ WSGI_APPLICATION = 'greenrider.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": "railway",  
+#         "USER": "root",     
+#         "PASSWORD": "dQaFAcFDKLtUAjdXGgSccPxbzuabcrDt", 
+#         "HOST": "mysql.railway.internal",  
+#         "PORT": "3306",     
+#     }
+# }
+
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "railway",  
-        "USER": "root",     
-        "PASSWORD": "dQaFAcFDKLtUAjdXGgSccPxbzuabcrDt", 
-        "HOST": "mysql.railway.internal",  
-        "PORT": "3306",     
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('railway'),
+        'USER': os.environ.get('root'),
+        'PASSWORD': os.environ.get('dQaFAcFDKLtUAjdXGgSccPxbzuabcrDt'),
+        'HOST': os.environ.get('mysql.railway.internal'),
+        'PORT': os.environ.get('3306'),
     }
 }
 
@@ -108,11 +121,11 @@ DATABASES = {
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.mysql",
-#         "NAME": os.getenv("MYSQLDATABASE"),   # railway
-#         "USER": os.getenv("MYSQLUSER"),       # root
-#         "PASSWORD": os.getenv("MYSQLPASSWORD"),  # dQaFAcFDKLtUAjdXGgSccPxbzuabcrDt
-#         "HOST": os.getenv("MYSQLHOST"),       # mysql.railway.internal
-#         "PORT": os.getenv("MYSQLPORT"),       # 3306
+#         "NAME": os.getenv("railway"),   
+#         "USER": os.getenv("root"),       
+#         "PASSWORD": os.getenv("dQaFAcFDKLtUAjdXGgSccPxbzuabcrDt"),   
+#         "HOST": os.getenv("mysql.railway.internal"),        
+#         "PORT": os.getenv("3306"),        
 #     }
 # }
 
