@@ -1,1 +1,1 @@
-web: gunicorn greenrider.wsgi
+web: gunicorn greenrider.wsgi --bind 0.0.0.0:$PORT
