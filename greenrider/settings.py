@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'greenrider.urls'
@@ -76,12 +77,6 @@ WSGI_APPLICATION = 'greenrider.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 # DATABASES = {
 #     "default": {
@@ -94,16 +89,6 @@ WSGI_APPLICATION = 'greenrider.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": "railway",  
-#         "USER": "root",     
-#         "PASSWORD": "dQaFAcFDKLtUAjdXGgSccPxbzuabcrDt", 
-#         "HOST": "mysql.railway.internal",  
-#         "PORT": "3306",     
-#     }
-# }
 
 
 DATABASES = {
@@ -118,16 +103,6 @@ DATABASES = {
 }
 
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": os.getenv("railway"),   
-#         "USER": os.getenv("root"),       
-#         "PASSWORD": os.getenv("dQaFAcFDKLtUAjdXGgSccPxbzuabcrDt"),   
-#         "HOST": os.getenv("mysql.railway.internal"),        
-#         "PORT": os.getenv("3306"),        
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -164,6 +139,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
