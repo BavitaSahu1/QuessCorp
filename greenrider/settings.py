@@ -82,17 +82,39 @@ WSGI_APPLICATION = 'greenrider.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": "greenrider",
+#         "USER": "root",
+#         "PASSWORD": "offer@123",
+#         "HOST": "localhost",
+#         "PORT": "3306",
+#     }
+# }
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "greenrider",
-        "USER": "root",
-        "PASSWORD": "offer@123",
-        "HOST": "localhost",
-        "PORT": "3306",
+        "NAME": "railway",  
+        "USER": "root",     
+        "PASSWORD": "dQaFAcFDKLtUAjdXGgSccPxbzuabcrDt", 
+        "HOST": "mysql.railway.internal",  
+        "PORT": "3306",     
     }
 }
 
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": os.getenv("MYSQLDATABASE"),   # railway
+#         "USER": os.getenv("MYSQLUSER"),       # root
+#         "PASSWORD": os.getenv("MYSQLPASSWORD"),  # dQaFAcFDKLtUAjdXGgSccPxbzuabcrDt
+#         "HOST": os.getenv("MYSQLHOST"),       # mysql.railway.internal
+#         "PORT": os.getenv("MYSQLPORT"),       # 3306
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
