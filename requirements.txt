@@ -2,3 +2,4 @@ Django>=4.2
 gunicorn
 mysqlclient>=2.2.0
 python-dotenv
+mysql-connector-python
