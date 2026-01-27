@@ -117,7 +117,8 @@ DATABASES = {
 print(
     os.environ.get("MYSQLHOST"),
     os.environ.get("MYSQLDATABASE"),
-)
+    ' Hello'
+) 
 
 
 # Password validation
