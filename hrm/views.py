@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from greenrider import db_connector
+from hrm import db_connector
 from django.db import connection
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime, timedelta
 import pytz
-
+from greenrider import db_connector
 
 ## Fetching Current Date Time in UTC Format --
 ist_timezone = pytz.timezone('Asia/Kolkata')
