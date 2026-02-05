@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime, timedelta
 import pytz
-from greenrider import db_connector
+from hrm import db_connector
 
 ## Fetching Current Date Time in UTC Format --
 ist_timezone = pytz.timezone('Asia/Kolkata')
