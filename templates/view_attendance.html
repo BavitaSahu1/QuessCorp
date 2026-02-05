@@ -11,7 +11,7 @@
   </div>
 </form> <br> 
 
-<div class="shadow-lg p-3 mb-5 rounded" style="border-radius: 15px; background-color: rgba(255,255,255,0.13); text-align: center;"><h2>Attendance List</h2></div>
+<div class="shadow-lg p-3 mb-5 rounded" style="border-radius: 15px; background-color: rgba(255,255,255,0.13); text-align: center;"><h3>Attendance Management</h3></div>
 <br>
   
 
@@ -31,37 +31,79 @@
 
 
 
+
+
   <div style="padding: 3px;">
   <div class="table-responsive">
+
+    <!-- START Mark Attendance button with MOdel -->
+    <form action="javascript:void(0);" style="float: right;">
+      <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#markAttendanceModal">
+        <i class="fa fa-plus"></i> Mark Attendance 
+      </button>
+    </form> <br><br>
+    <!-- END - Mark Attendance button with model -->
+    
   <table class="table" id="myTable" border="">
     <thead>
-      <tr style="background-color: black; color: white;">
-        <th scope="col">Employee ID</th>
+      <tr style="background-color: 	#ccccff; color: black;">
         <th scope="col">Name</th>
+        <th scope="col">Employee ID</th>
         <th scope="col">Date</th>
-        <th scope="col">In Time</th>
-        <th scope="col">Out Time</th>
-        <th scope="col">Status</th>
-        <th scope="col">Update Status</th>
+        <th scope="col">Check In</th>
+        <th scope="col">Check Out</th>
+        <th scope="col">Attendance Status</th>
+        <!-- <th scope="col">Update Status</th> -->
       </tr>
     </thead>
     <tbody>
         {% for i in data %}
-      <tr style="background-color: #ededfc;">    
-        <td>{{i.emp_id}}</td>   
+      <tr style="background-color: #e6e6ff;">              
         <td>{{i.full_name}}</td>
+        <td>{{i.emp_id}}</td> 
         <td>{{i.attendance_date}}</td>
         <td>{{i.in_time}}</td>
         <td>{{i.out_time}}</td>
-        <td>{{i.emp_status}}</td>
+        <!-- <td>{{i.emp_status}}</td> -->
+         <td>
+  {% if i.emp_status == "Present" %}
+    <span class="badge badge-success">Present</span>
+  {% elif i.emp_status == "Absent" %}
+    <span class="badge badge-danger">Absent</span>
+  {% else %}
+    <span class="badge badge-secondary">{{ i.emp_status }}</span>
+  {% endif %}
+</td>
 
-        <td>
-            <form action="{% url 'EditAttStatus' %}" method="post"> 
+        
+
+        <!-- <td>  -->
+          <!-- start button for model -->
+          <!-- <button type="button"
+        class="btn btn-outline-success edit-btn"
+        data-toggle="modal"
+        data-target="#editAttendanceModal"
+        data-emp_id="{{i.emp_id}}"
+        data-name="{{i.full_name}}"
+        data-date="{{i.attendance_date}}"
+        data-in="{{i.in_time}}"
+        data-out="{{i.out_time}}"
+        data-status="{{i.emp_status}}">
+        <i class="fas fa-edit"></i> Edit Attendance
+        </button> -->
+        <!-- end button for model -->
+
+          <!-- start button using older form -->
+
+            <!-- <form action="{% url 'EditAttStatus' %}" method="post"> 
             {% csrf_token %}
               <input type="hidden" name="editBtn" value="{{i.emp_id}}">
-              <button type="submit" class="btn btn-outline-success"><i class="fas fa-edit"></i> Update Status</button>
-            </form>
-        </td>
+              <input type="hidden" name="editBtn2" value="{{i.attendance_date}}">
+              <button type="submit" class="btn btn-outline-success"><i class="fas fa-edit"></i> Edit Attendance</button>
+            </form> -->
+
+            <!-- end button using oldef form -->
+        <!-- </td> -->
       </tr>
       {% endfor %}
     </tbody>
@@ -70,6 +112,144 @@
   </div>
 
 
+<!-- START MOdel for Mark Attendance ##########################################-->
+   <div class="modal fade" id="markAttendanceModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content" style="border-radius: 15px;">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Mark Attendance</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <form method="post" action="{% url 'MarkAttendance' %}">
+        {% csrf_token %}
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label>Select User <span style="color: red; font-size: 20px;">*</span></label>
+            <select class="form-control" name="emp_id" required>
+              <option value="">-- Select --</option>
+              {% for i in model_data %}
+                <option value="{{i.emp_id}}">{{i.full_name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Date <span style="color: red; font-size: 20px;">*</span></label>
+            <input type="date" class="form-control" name="attendance_date" required>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <label>Check In</label>
+              <input type="time" class="form-control" name="in_time">
+            </div>
+            <div class="col-md-6">
+              <label>Check Out</label>
+              <input type="time" class="form-control" name="out_time">
+            </div>
+          </div>
+
+          <div class="form-group mt-3">
+            <label>Status</label>
+            <select class="form-control" name="emp_status">
+              <option value="Present">Present</option>
+              <option value="Absent">Absent</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-primary">Save</button>
+          <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+<!-- END MOdel - Mark Attendance ############################################# -->
+
+
+
+<!-- START MOdel for Edit Attendance ###################################### -->
+<!-- EDIT ATTENDANCE MODAL -->
+<!-- <div class="modal fade" id="editAttendanceModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content" style="border-radius: 15px;">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Attendance</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <form method="post" action="{% url 'EditAttStatus' %}">
+        {% csrf_token %}
+
+        <input type="hidden" name="emp_id" id="edit_emp_id">
+
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <h5 id="edit_name"></h5>
+            <small id="edit_emp_code" class="text-muted"></small>
+          </div>
+
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" class="form-control" name="attendance_date" id="edit_date">
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <label>Check In</label>
+              <input type="time" class="form-control" name="in_time" id="edit_in">
+            </div>
+            <div class="col-md-6">
+              <label>Check Out</label>
+              <input type="time" class="form-control" name="out_time" id="edit_out">
+            </div>
+          </div>
+
+          <div class="form-group mt-3">
+            <label>Status</label>
+            <select class="form-control" name="emp_status" id="edit_status">
+              <option value="Present">Present</option>
+              <option value="Absent">Absent</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-primary">Save</button>
+          <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div> -->
+<!-- END MODAL -->
+<!-- <script>
+  $('.edit-btn').click(function () {
+
+    $('#edit_emp_id').val($(this).data('emp_id'));
+    $('#edit_name').text($(this).data('name'));
+    $('#edit_emp_code').text($(this).data('emp_id'));
+
+    $('#edit_date').val($(this).data('date'));
+    $('#edit_in').val($(this).data('in'));
+    $('#edit_out').val($(this).data('out'));
+    $('#edit_status').val($(this).data('status'));
+
+  });
+</script> -->
+
+<!-- END MOdel for Edit Attendance ###################################### -->
 
 
   <script>

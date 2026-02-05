@@ -1,19 +1,19 @@
 {% extends 'base_admin.html' %}
 {% block content %}
 
-<br> <br>
+<br> 
 
 <form class="form-inline my-2 my-lg-0" method="post">
   {% csrf_token %} 
   <div style="padding: 20px;">
-  <input class="form-control mr-sm-2" type="search" placeholder="Search by Name" name="a_name" aria-label="Search">
-  <input class="form-control mr-sm-2" type="search" placeholder="Search by Email" name="a_email" aria-label="Search">
+  <input class="form-control mr-sm-2" type="date" placeholder="Search by Date" name="att_date" aria-label="Search">
   <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> Search</button>
   </div>
-</form> <br> <br>  
+</form> <br> 
 
-<div class="shadow-lg p-3 mb-5 rounded" style="border-radius: 15px; background-color: rgba(255,255,255,0.13); text-align: center;"><h2>All Employee List</h2></div>
+<div class="shadow-lg p-3 mb-5 rounded" style="border-radius: 15px; background-color: rgba(255,255,255,0.13); text-align: center;"><h2>Attendance List</h2></div>
 <br>
+  
 
 
 
@@ -36,28 +36,31 @@
   <table class="table" id="myTable" border="">
     <thead>
       <tr style="background-color: black; color: white;">
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
         <th scope="col">Employee ID</th>
-        <th scope="col">Department</th>
-        <th scope="col">Delete Record</th>
+        <th scope="col">Name</th>
+        <th scope="col">Date</th>
+        <th scope="col">In Time</th>
+        <th scope="col">Out Time</th>
+        <th scope="col">Status</th>
+        <th scope="col">Update Status</th>
       </tr>
     </thead>
     <tbody>
         {% for i in data %}
-      <tr style="background-color: #ededfc;">       
+      <tr style="background-color: #ededfc;">    
+        <td>{{i.emp_id}}</td>   
         <td>{{i.full_name}}</td>
-        <td>{{i.email_address}}</td>
-        <td>{{i.emp_id}}</td>
-        <td>{{i.department}}</td>
-
+        <td>{{i.attendance_date}}</td>
+        <td>{{i.in_time}}</td>
+        <td>{{i.out_time}}</td>
+        <td>{{i.emp_status}}</td>
 
         <td>
-          <form action="{% url 'DeleteEmp' %}" method="post">
+            <form action="{% url 'EditAttStatus' %}" method="post"> 
             {% csrf_token %}
-            <input type="hidden" name="DeleteBtn" value="{{i.emp_id}}">
-            <button type="submit" class="delete-button btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
-          </form>
+              <input type="hidden" name="editBtn" value="{{i.emp_id}}">
+              <button type="submit" class="btn btn-outline-success"><i class="fas fa-edit"></i> Update Status</button>
+            </form>
         </td>
       </tr>
       {% endfor %}
