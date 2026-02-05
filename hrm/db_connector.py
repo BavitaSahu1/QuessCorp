@@ -6,7 +6,7 @@ def create_connection():
         # connection = mysql.connector.connect(
         #     host="localhost",
         #     user="root",
-        #     database="greenrider",
+        #     database="hrm_lite",
         #     password="offer@123",
         #     port = '3306',
         # )

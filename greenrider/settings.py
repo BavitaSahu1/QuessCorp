@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'greenrider.wsgi.application'
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.mysql",
-#         "NAME": "greenrider",
+#         "NAME": "hrm_lite",
 #         "USER": "root",
 #         "PASSWORD": "offer@123",
 #         "HOST": "localhost",
